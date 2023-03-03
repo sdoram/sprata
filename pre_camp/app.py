@@ -30,7 +30,6 @@ def music_post():
     title = soup.select_one('meta[property="og:title"]')['content']
     image = soup.select_one('meta[property="og:image"]')['content']
     desc = soup.select_one('meta[property="og:description"]')['content']
-
     doc = {
         'source_code' : source_receive,
         'title':title,
@@ -51,3 +50,4 @@ def music_get():
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
+
