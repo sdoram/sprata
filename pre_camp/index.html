@@ -13,7 +13,8 @@
             crossorigin="anonymous"></script>
 
     <!--    다른 아이콘 구해서 url 교체하기-->
-    <link rel="shortcut icon" type="image/x-icon" href="https://s.pstatic.net/static/www/u/2014/0328/mma_204243574.png">
+    <link rel="shortcut icon" type="image/x-icon"
+          href="https://www.youtube.com/s/desktop/32c4e480/img/favicon_32x32.png">
 
     <title>🎵share my music🎵</title>
 
@@ -69,7 +70,7 @@
 
         .mypost {
             width: 95%;
-            max-width: 500px;
+            max-width: 1000px;
             margin: 20px auto 0px auto;
             padding: 20px;
             box-shadow: 0px 0px 3px 0px gray;
@@ -109,6 +110,7 @@
 
         function listing() {
             $('#cards-box').empty()
+
             $.ajax({
                 type: 'GET',
                 url: '/music',
@@ -127,33 +129,44 @@
                         let temp_html = `<div class="col">
                                             <div class="card h-100">
                                                 <div class="card-body">
+<!--                                                    <div id="area">-->
+<!--                                                     <iframe id="youtube"  src="https://www.youtube.com/embed/${source_code}"/>-->
+<!--                                                    </div>-->
+                                                </div>
+                                                <h5 class="card-title">${title}</h5>
+                                                <p class="card-text">${desc}</p>
+                                                <p>${star_image}</p>
+                                                <p class="mycomment">${comment}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="card h-100">
+                                                <div class="card-body">
                                                     <div id="area">
-                                                          <iframe id="video" src="${source_code}" />
-                                                        </div>
-                                                    <h5 class="card-title">${title}</h5>
-                                                    <p class="card-text">${desc}</p>
-                                                    <p>${star_image}</p>
-                                                    <p class="mycomment">${comment}</p>
+                                                     <iframe id="youtube" src="https://www.youtube.com/embed/${source_code}"/>
+                                                    </div>
+                                                        <h5 class="card-title">${title}</h5>
+                                                        <p class="card-text">${desc}</p>
+                                                        <p>${star_image}</p>
+                                                        <p class="mycomment">${comment}</p>
                                                 </div>
                                             </div>
                                         </div>`
+
+
+
                         $('#cards-box').append(temp_html)
                     }
                 }
             })
         }
 
-        <iframe width="1280" height="720" src="https://www.youtube.com/embed/KgOfyyaOkEs"
-                title="딘딘 (DINDIN) - 이러면 안 될 거 아는데 너 앞에만 서면 나락 (I’m not myself when I’m around you) (Feat. 10CM) MV"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen></iframe>
-
         function posting() {
             let url = $('#url').val()
             let star = $('#star').val()
             let comment = $('#comment').val()
-            let source_code = $('#source_code').val()
+            // url에서 키값만 잘라서 소스코드에 넣음
+            let source_code = $('#url').val().slice(32, 43)
 
             $.ajax({
                 type: 'POST',
@@ -186,10 +199,6 @@
         <input id="url" type="email" class="form-control" placeholder="name@example.com">
         <label>유튜브 URL</label>
     </div>
-    <div class="form-floating mb-3">
-        <input id="source_code" type="email" class="form-control" placeholder="name@example.com">
-        <label>유튜브 소스 코드</label>
-    </div>
     <div class="input-group mb-3">
         <label class="input-group-text" for="inputGroupSelect01">별점</label>
         <select class="form-select" id="star">
@@ -211,16 +220,17 @@
     </div>
 </div>
 <div class="mycards">
-    <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+    <div class="d-flex flex-row-reverse bd-highlight row row-cols-2 row-cols-md-2 g-4" id="cards-box">
         <div class="col">
             <div class="card h-100">
-                <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
-                     class="card-img-top">
+                <div id="area">
+                    <iframe id="youtube" src="https://www.youtube.com/embed/${source_code}"/>
+                    </div>
                 <div class="card-body">
-                    <h5 class="card-title">노래 제목이 들어갑니다</h5>
-                    <p class="card-text">여기에 노래에 대한 설명이 들어갑니다.</p>
-                    <p>⭐⭐⭐</p>
-                    <p class="mycomment">나의 한줄 평을 씁니다</p>
+                        <h5 class="card-title">노래 제목이 들어갑니다</h5>
+                        <p class="card-text">여기에 노래에 대한 설명이 들어갑니다.</p>
+                        <p>⭐⭐⭐</p>
+                        <p class="mycomment">나의 한줄 평을 씁니다</p>
                 </div>
             </div>
         </div>
