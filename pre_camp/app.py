@@ -29,7 +29,8 @@ def music_post():
 
     title = soup.select_one('meta[property="og:title"]')['content']
     image = soup.select_one('meta[property="og:image"]')['content']
-    desc = soup.select_one('meta[property="og:description"]')['content']
+    desc = soup.select_one('# description-inline-expander > yt-attributed-string > span"]')['content']
+
     doc = {
         'source_code' : source_receive,
         'title':title,

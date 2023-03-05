@@ -106,6 +106,21 @@
             padding-right: 0 !important;
             padding-left: 0 !important;
         }
+        .h-100 {
+            border: lawngreen 2px solid;
+            border-radius: 10px;
+        }
+        .left-box {
+            border-right-width: 1px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+
+        }
+        .right-box{
+            border-left-width: 1px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+        }
     </style>
     <script>
         $(document).ready(function () {
@@ -131,8 +146,8 @@
                         let star_image = '⭐'.repeat(star)
 
                         let temp_html = `<div class="col">
-                                            <div class="card h-100">
-                                                <div class="card-body">
+                                            <div class="card h-100 right-box">
+                                                <div class="card-body" >
                                                 <h5 class="card-title">${title}</h5>
                                                 <p class="card-text">${desc}</p>
                                                 <p>${star_image}</p>
@@ -141,15 +156,11 @@
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <div class="card h-100">
+                                            <div class="card h-100 left-box" >
                                                 <div class="card-body">
-                                                    <div id="area">
+                                                    <div id="area" >
                                                      <iframe id="youtube" src="https://www.youtube.com/embed/${source_code}"/>
                                                     </div>
-                                                        <h5 class="card-title">${title}</h5>
-                                                        <p class="card-text">${desc}</p>
-                                                        <p>${star_image}</p>
-                                                        <p class="mycomment">${comment}</p>
                                                 </div>
                                             </div>
                                         </div>`
@@ -168,6 +179,7 @@
             let comment = $('#comment').val()
             // url에서 키값만 잘라서 소스코드에 넣음
             let source_code = $('#url').val().slice(32, 43)
+
 
             $.ajax({
                 type: 'POST',
