@@ -1,23 +1,14 @@
 import requests
 from bs4 import BeautifulSoup
 
-url = 'https://www.youtube.com/watch?v=zugAhfd2r0g&list=PLVI3CAcQB7GM7pBqn8WYVkSKn2QfUbS2E&index=14&ab_channel=JYPEntertainment'
+url = 'https://www.youtube.com/watch?v=Il-an3K9pjg&ab_channel=Anne-Marie'
 
-response = requests.get(url)
+url_receive = requests.get(url)
 
-if response.status_code == 200:
-    html = response.text
-    soup = BeautifulSoup(html, 'html.parser')
-    title = soup.select('#default-metadata-section')
-    artist = soup.select_one('#info-rows')
-    song = soup.select_one('#default-metadata')
-    # print(song)
-    print(artist)
-    print(title)
-    # print(soup)
+soup = BeautifulSoup(url_receive.text, 'html.parser')
 
+# title = soup.select_one('div > a > ul > li:nth-child(1) > strong').get_text()
+title = soup.select_one('#text > a').get_text()
 
-    # class ="yt-simple-endpoint style-scope yt-formatted-string" spellcheck="false" href="/channel/UCs-QBT4qkj_YiQw1ZntDO3g" dir="auto" > LE SSERAFIM < / a >
-
-else : 
-    print(response.status_code)
+print(title)
+# print(soup)
