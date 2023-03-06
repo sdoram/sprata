@@ -28,15 +28,32 @@ def chromedriver_update(): # 크롬드라이버 자동 업데이트
         AutoChrome.install(True)           # 크롬 드라이버 설치
     else: pass                             # pass
      
-def selenium_test():
+def selenium_test(): # youtube 크롤링 
     chrome_ver = AutoChrome.get_chrome_version().split('.')[0]
     path = os.path.join(os.getcwd(),chrome_ver)
     path = os.path.join(path,'chromedriver.exe')
-    URL = 'https://www.naver.com/'
+    URL = 'https://www.youtube.com/watch?v=Il-an3K9pjg&ab_channel=Anne-Marie'
     driver = webdriver.Chrome(str(path))
     driver.get(url=URL)
-    news = driver.find_element(By.CLASS_NAME,"title")
-    print(news.text)
+    # news1 = []
+    # news = driver.find_elements(By.CLASS_NAME,"title")
+    # news1.append(news)
+    # print(news1)
+    
+    artists = driver.find_elements(By.XPATH, '//*[@id="default-metadata"]/a')
+    songs = driver.find_elements(By.XPATH, '//*[@id="default-metadata"]')
+
+    # for song in songs: # 가수 크롤링
+    #     print(song.get_attribute('text'))
+    #     time.sleep(0.1)
+    #     # break
+        
+    for artist in artists: # 가수 크롤링
+        print(artist.get_attribute('text'))
+        time.sleep(0.1)
+        break
+    
+
     
     
     
@@ -44,5 +61,5 @@ def selenium_test():
     #     pass
     time.sleep(3) # 3초 뒤에 닫힘
     
-chromedriver_update() # 크롬드라이버 자동 업데이트
+# chromedriver_update() # 크롬드라이버 자동 업데이트
 selenium_test()
