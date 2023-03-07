@@ -139,9 +139,9 @@
                     for (let i = 0; i < rows.length; i++) {
                         let source_code = rows[i]['source_code']
                         let title = rows[i]['title']
-                        let desc = rows[i]['desc']
                         let star = rows[i]['star']
                         let comment = rows[i]['comment']
+                        let artist = rows[i]['artist']
 
                         let star_image = '⭐'.repeat(star)
 
@@ -149,7 +149,7 @@
                                             <div class="card h-100 right-box">
                                                 <div class="card-body" >
                                                 <h5 class="card-title">${title}</h5>
-                                                <p class="card-text">${desc}</p>
+                                                <h5 class="card-title">${artist}</h5>
                                                 <p>${star_image}</p>
                                                 <p class="mycomment">${comment}</p>
                                                 </div>
