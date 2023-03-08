@@ -30,7 +30,19 @@ def chromedriver_update(): # 크롬드라이버 자동 업데이트
     else: pass                             # pass
         
      
-youtube_link = 'https://www.youtube.com/watch?v=nfWlot6h_JM&ab_channel=TaylorSwiftVEVO' 
+youtube_link = 'https://www.youtube.com/watch?v=Il-an3K9pjg&ab_channel=Anne-Marie' 
+chromedriver_update()
+
+def link (youtube_link):
+    if youtube_link.find("youtu.be") == -1:
+            url = youtube_link.split("watch?v=")[1][0:11]
+            print(url)
+    elif youtube_link.find("youtube.com") == -1:
+            url = youtube_link.split(".be/")[1]
+            print(url)
+link(youtube_link)
+
+
 
 class youtube:     
     def crawling (link): # youtube 크롤링 
@@ -38,14 +50,16 @@ class youtube:
         path = os.path.join(os.getcwd(),chrome_ver)
         path = os.path.join(path,'chromedriver.exe')
         options = webdriver.ChromeOptions()
+        options.add_argument("headless")
         options.add_experimental_option("excludeSwitches", ["enable-logging"])
         driver = webdriver.Chrome(options=options)
         driver.get(url=link)
         
-        # time.sleep(5)
+        time.sleep(5)
         artists = driver.find_elements(By.XPATH, '//*[@id="default-metadata"]/a')
-        
+    
         for artist in artists : # 가수 크롤링
+            # print(artists[1].get_attribute('text'))
             print(artist.get_attribute('text'))
             return artist.get_attribute('text')
         
@@ -60,5 +74,5 @@ if __name__ == "__main__":
     chromedriver_update() # 크롬드라이버 자동 업데이트
     youtube.crawling(youtube_link)
 
-# 노래 크롤링 방법
-# 백그라운드 실행 
+# 노래 크롤링 방법 
+# 백그라운드 실행 해결 

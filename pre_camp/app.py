@@ -1,12 +1,12 @@
 from flask import Flask, render_template, request, jsonify
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait # 브라우저의 응답을 기다릴 수 있게 하기 위해
-from selenium.webdriver.support import expected_conditions as EC # html요소의 상태를 체크할 수 있게 하기 위해
-import os
-import chromedriver_autoinstaller as AutoChrome
-import shutil
-import time
+# from selenium import webdriver
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.support.ui import WebDriverWait # 브라우저의 응답을 기다릴 수 있게 하기 위해
+# from selenium.webdriver.support import expected_conditions as EC # html요소의 상태를 체크할 수 있게 하기 위해
+# import os
+# import chromedriver_autoinstaller as AutoChrome
+# import shutil
+# import time
 import youtube
 
 app = Flask(__name__)
@@ -27,7 +27,6 @@ def home():
 @app.route("/music", methods=["POST"])
 def music_post():
     url_receive = request.form['url_give']
-    
     star_receive = request.form['star_give']
     comment_receive = request.form['comment_give']
     source_receive = request.form['source_give']
