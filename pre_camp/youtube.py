@@ -30,7 +30,7 @@ def chromedriver_update(): # 크롬드라이버 자동 업데이트
     else: pass                             # pass
         
      
-youtube_link = 'https://www.youtube.com/watch?v=Il-an3K9pjg&ab_channel=Anne-Marie' 
+youtube_link = 'https://www.youtube.com/watch?v=41qC3w3UUkU&ab_channel=SevenHip-Hop' 
 chromedriver_update()
 
 def link (youtube_link):
@@ -50,20 +50,25 @@ class youtube:
         path = os.path.join(os.getcwd(),chrome_ver)
         path = os.path.join(path,'chromedriver.exe')
         options = webdriver.ChromeOptions()
-        options.add_argument("headless")
+        options.add_argument("headless") # 백그라운드 실행
         options.add_experimental_option("excludeSwitches", ["enable-logging"])
         driver = webdriver.Chrome(options=options)
         driver.get(url=link)
         
-        time.sleep(5)
-        artists = driver.find_elements(By.XPATH, '//*[@id="default-metadata"]/a')
-    
-        for artist in artists : # 가수 크롤링
-            # print(artists[1].get_attribute('text'))
-            print(artist.get_attribute('text'))
-            return artist.get_attribute('text')
+        time.sleep(1)
         
-        driver.close()
+        music_crawling = driver.find_elements(By.ID, 'default-metadata')[0] # 제목
+        artist_crawling = driver.find_elements(By.ID, 'default-metadata')[1] # 가수
+        album_crawling = driver.find_elements(By.ID, 'default-metadata')[2] # 앨범
+        
+        music = music_crawling.get_attribute('innerText')
+        artist = artist_crawling.get_attribute('innerText')
+        album = album_crawling.get_attribute('innerText')
+
+        print(music)
+        print(artist)
+        print(album)
+        return music,artist,album,driver.close()
     
     # while(True): # 브라우저 닫힘 방지
     #     pass
@@ -74,5 +79,5 @@ if __name__ == "__main__":
     chromedriver_update() # 크롬드라이버 자동 업데이트
     youtube.crawling(youtube_link)
 
-# 노래 크롤링 방법 
-# 백그라운드 실행 해결 
+# 노래 크롤링 방법 성공
+# 백그라운드 실행 해결 성공
