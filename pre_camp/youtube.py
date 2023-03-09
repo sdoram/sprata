@@ -1,13 +1,8 @@
-import requests
-from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait # 브라우저의 응답을 기다릴 수 있게 하기 위해
-from selenium.webdriver.support import expected_conditions as EC # html요소의 상태를 체크할 수 있게 하기 위해
 import os
 import chromedriver_autoinstaller as AutoChrome
 import shutil
-import time
 
 def chromedriver_update(): # 크롬드라이버 자동 업데이트
     chrome_ver = AutoChrome.get_chrome_version().split('.')[0] # 현재 크롬 버전 확인
@@ -30,7 +25,7 @@ def chromedriver_update(): # 크롬드라이버 자동 업데이트
     else: pass                             # pass
         
      
-youtube_link = 'https://www.youtube.com/watch?v=41qC3w3UUkU&ab_channel=SevenHip-Hop' 
+youtube_link = 'https://www.youtube.com/watch?v=jKbWN9qgeiY&ab_channel=1theK%28%EC%9B%90%EB%8D%94%EC%BC%80%EC%9D%B4%29' 
 chromedriver_update()
 
 def link (youtube_link):
@@ -54,8 +49,7 @@ class youtube:
         options.add_experimental_option("excludeSwitches", ["enable-logging"])
         driver = webdriver.Chrome(options=options)
         driver.get(url=link)
-        
-        time.sleep(1)
+        driver.implicitly_wait(100) # 최대 100초 대기, 결과 찾으면 종료
         
         music_crawling = driver.find_elements(By.ID, 'default-metadata')[0] # 제목
         artist_crawling = driver.find_elements(By.ID, 'default-metadata')[1] # 가수
@@ -69,7 +63,7 @@ class youtube:
         print(artist)
         print(album)
         return music,artist,album,driver.close()
-    
+
     # while(True): # 브라우저 닫힘 방지
     #     pass
     
