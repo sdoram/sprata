@@ -72,6 +72,3 @@ class youtube:
 if __name__ == "__main__":
     chromedriver_update() # 크롬드라이버 자동 업데이트
     youtube.crawling(youtube_link)
-
-# 노래 크롤링 방법 성공
-# 백그라운드 실행 해결 성공
