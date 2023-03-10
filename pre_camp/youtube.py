@@ -1,5 +1,7 @@
+# 크롤링 관련
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+# 크롬드라이버 관련
 import os
 import chromedriver_autoinstaller as AutoChrome
 import shutil
@@ -26,8 +28,8 @@ def chromedriver_update(): # 크롬드라이버 자동 업데이트
         
      
 youtube_link = 'https://www.youtube.com/watch?v=jKbWN9qgeiY&ab_channel=1theK%28%EC%9B%90%EB%8D%94%EC%BC%80%EC%9D%B4%29' 
-chromedriver_update()
 
+# youtube 링크 구분
 def link (youtube_link):
     if youtube_link.find("youtu.be") == -1:
             url = youtube_link.split("watch?v=")[1][0:11]
@@ -41,20 +43,29 @@ link(youtube_link)
 
 class youtube:     
     def crawling (link): # youtube 크롤링 
+        # 경로
         chrome_ver = AutoChrome.get_chrome_version().split('.')[0]
         path = os.path.join(os.getcwd(),chrome_ver)
         path = os.path.join(path,'chromedriver.exe')
+        
+        # 옵션
         options = webdriver.ChromeOptions()
         options.add_argument("headless") # 백그라운드 실행
         options.add_experimental_option("excludeSwitches", ["enable-logging"])
         driver = webdriver.Chrome(options=options)
+        
+        # 크롤링 링크
         driver.get(url=link)
+        
+        # 대기 시간
         driver.implicitly_wait(100) # 최대 100초 대기, 결과 찾으면 종료
         
+        # 크롤링 대상
         music_crawling = driver.find_elements(By.ID, 'default-metadata')[0] # 제목
         artist_crawling = driver.find_elements(By.ID, 'default-metadata')[1] # 가수
         album_crawling = driver.find_elements(By.ID, 'default-metadata')[2] # 앨범
         
+        # 결과 추출
         music = music_crawling.get_attribute('innerText')
         artist = artist_crawling.get_attribute('innerText')
         album = album_crawling.get_attribute('innerText')
