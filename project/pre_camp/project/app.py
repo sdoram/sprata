@@ -6,9 +6,7 @@ from ytmusicapi import YTMusic
 import youtube # 크롤링 모듈
 app = Flask(__name__)
 
-client = MongoClient(
-    'mongodb+srv://sparta:test@cluster0.caexhck.mongodb.net/?retryWrites=true&w=majority')
-db = client.dbsparta  # DB명
+client = MongoClient
 
 #Youtube
 from ytmusicapi import YTMusic
